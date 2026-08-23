@@ -508,6 +508,48 @@ func GetWaveAIRateLimitCommand(w *wshutil.WshRpc, opts *wshrpc.RpcOpts) (*uctype
 	return resp, err
 }
 
+// command "gitcommit", wshserver.GitCommitCommand
+func GitCommitCommand(w *wshutil.WshRpc, data wshrpc.CommandGitCommitData, opts *wshrpc.RpcOpts) error {
+	_, err := sendRpcRequestCallHelper[any](w, "gitcommit", data, opts)
+	return err
+}
+
+// command "gitdiff", wshserver.GitDiffCommand
+func GitDiffCommand(w *wshutil.WshRpc, data wshrpc.CommandGitDiffData, opts *wshrpc.RpcOpts) (string, error) {
+	resp, err := sendRpcRequestCallHelper[string](w, "gitdiff", data, opts)
+	return resp, err
+}
+
+// command "gitdiscard", wshserver.GitDiscardCommand
+func GitDiscardCommand(w *wshutil.WshRpc, data wshrpc.CommandGitFileData, opts *wshrpc.RpcOpts) error {
+	_, err := sendRpcRequestCallHelper[any](w, "gitdiscard", data, opts)
+	return err
+}
+
+// command "gitstage", wshserver.GitStageCommand
+func GitStageCommand(w *wshutil.WshRpc, data wshrpc.CommandGitFileData, opts *wshrpc.RpcOpts) error {
+	_, err := sendRpcRequestCallHelper[any](w, "gitstage", data, opts)
+	return err
+}
+
+// command "gitstageall", wshserver.GitStageAllCommand
+func GitStageAllCommand(w *wshutil.WshRpc, data wshrpc.CommandGitStatusData, opts *wshrpc.RpcOpts) error {
+	_, err := sendRpcRequestCallHelper[any](w, "gitstageall", data, opts)
+	return err
+}
+
+// command "gitstatus", wshserver.GitStatusCommand
+func GitStatusCommand(w *wshutil.WshRpc, data wshrpc.CommandGitStatusData, opts *wshrpc.RpcOpts) (*wshrpc.GitStatusData, error) {
+	resp, err := sendRpcRequestCallHelper[*wshrpc.GitStatusData](w, "gitstatus", data, opts)
+	return resp, err
+}
+
+// command "gitunstage", wshserver.GitUnstageCommand
+func GitUnstageCommand(w *wshutil.WshRpc, data wshrpc.CommandGitFileData, opts *wshrpc.RpcOpts) error {
+	_, err := sendRpcRequestCallHelper[any](w, "gitunstage", data, opts)
+	return err
+}
+
 // command "jobcmdexited", wshserver.JobCmdExitedCommand
 func JobCmdExitedCommand(w *wshutil.WshRpc, data wshrpc.CommandJobCmdExitedData, opts *wshrpc.RpcOpts) error {
 	_, err := sendRpcRequestCallHelper[any](w, "jobcmdexited", data, opts)

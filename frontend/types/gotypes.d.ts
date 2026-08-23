@@ -418,6 +418,30 @@ declare global {
         chatid: string;
     };
 
+    // wshrpc.CommandGitCommitData
+    type CommandGitCommitData = {
+        dir: string;
+        message: string;
+    };
+
+    // wshrpc.CommandGitDiffData
+    type CommandGitDiffData = {
+        dir: string;
+        file: string;
+        staged: boolean;
+    };
+
+    // wshrpc.CommandGitFileData
+    type CommandGitFileData = {
+        dir: string;
+        file: string;
+    };
+
+    // wshrpc.CommandGitStatusData
+    type CommandGitStatusData = {
+        dir: string;
+    };
+
     // wshrpc.CommandJobCmdExitedData
     type CommandJobCmdExitedData = {
         jobid: string;
@@ -1024,6 +1048,23 @@ declare global {
         buildtime: string;
     };
 
+    // wshrpc.GitFileEntry
+    type GitFileEntry = {
+        path: string;
+        status: string;
+    };
+
+    // wshrpc.GitStatusData
+    type GitStatusData = {
+        branch: string;
+        staged: GitFileEntry[];
+        unstaged: GitFileEntry[];
+        untracked: GitFileEntry[];
+        isrepo: boolean;
+        ahead: number;
+        behind: number;
+    };
+
     // waveobj.Job
     type Job = WaveObj & {
         connection: string;
@@ -1589,6 +1630,7 @@ declare global {
         "debug:panictype"?: string;
         "block:view"?: string;
         "block:controller"?: string;
+        "block:subblock"?: boolean;
         "ai:backendtype"?: string;
         "ai:local"?: boolean;
         "wsh:cmd"?: string;

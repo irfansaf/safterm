@@ -98,6 +98,15 @@ type WshRpcInterface interface {
 	UpdateWorkspaceTabIdsCommand(ctx context.Context, workspaceId string, tabIds []string) error
 	GetAllBadgesCommand(ctx context.Context) ([]baseds.BadgeEvent, error)
 
+	// git commands (pi-mesh addition)
+	GitStatusCommand(ctx context.Context, data CommandGitStatusData) (*GitStatusData, error)
+	GitDiffCommand(ctx context.Context, data CommandGitDiffData) (string, error)
+	GitStageCommand(ctx context.Context, data CommandGitFileData) error
+	GitUnstageCommand(ctx context.Context, data CommandGitFileData) error
+	GitStageAllCommand(ctx context.Context, data CommandGitStatusData) error
+	GitCommitCommand(ctx context.Context, data CommandGitCommitData) error
+	GitDiscardCommand(ctx context.Context, data CommandGitFileData) error
+
 	// connection functions
 	ConnStatusCommand(ctx context.Context) ([]ConnStatus, error)
 	WslStatusCommand(ctx context.Context) ([]ConnStatus, error)
@@ -565,6 +574,43 @@ type PathCommandData struct {
 	Open         bool   `json:"open"`
 	OpenExternal bool   `json:"openexternal"`
 	TabId        string `json:"tabid"`
+}
+
+// git commands (pi-mesh addition)
+
+type CommandGitStatusData struct {
+	Dir string `json:"dir"`
+}
+
+type CommandGitFileData struct {
+	Dir  string `json:"dir"`
+	File string `json:"file"`
+}
+
+type CommandGitDiffData struct {
+	Dir    string `json:"dir"`
+	File   string `json:"file"`
+	Staged bool   `json:"staged"`
+}
+
+type CommandGitCommitData struct {
+	Dir     string `json:"dir"`
+	Message string `json:"message"`
+}
+
+type GitFileEntry struct {
+	Path   string `json:"path"`
+	Status string `json:"status"` // "M", "A", "D", "R", "??", etc.
+}
+
+type GitStatusData struct {
+	Branch    string         `json:"branch"`
+	Staged    []GitFileEntry `json:"staged"`
+	Unstaged  []GitFileEntry `json:"unstaged"`
+	Untracked []GitFileEntry `json:"untracked"`
+	IsRepo    bool           `json:"isrepo"`
+	Ahead     int            `json:"ahead"`
+	Behind    int            `json:"behind"`
 }
 
 type ActivityDisplayType struct {
