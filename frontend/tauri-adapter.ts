@@ -110,4 +110,74 @@ async function setupTauri() {
 // Run eagerly but don't block app startup
 setupTauri();
 
+// Fallback: if window.api wasn't set by Electron preload and Tauri
+// didn't load, inject a minimal stub so the app can render an error.
+setTimeout(() => {
+    if (!(window as any).api) {
+        console.warn("[tauri] no window.api available, injecting fallback stub");
+        (window as any).api = {
+            getIsDev: async () => true,
+            getPlatform: async () => "web",
+            getHomeDir: async () => "~",
+            getDataDir: async () => ".",
+            getConfigDir: async () => ".",
+            getEnv: async () => "",
+            getUserName: async () => "dev",
+            getHostName: async () => "localhost",
+            getZoomFactor: async () => 1.0,
+            openNewWindow: async () => {},
+            createWorkspace: async () => {},
+            switchWorkspace: async () => {},
+            deleteWorkspace: async () => {},
+            closeTab: async () => true,
+            openExternal: () => {},
+            openNativePath: () => {},
+            getPathForFile: (p: string | null) => p ?? "",
+            saveTextFile: async () => false,
+            downloadFile: () => {},
+            captureScreenshot: async () => "",
+            showOpenDialog: async () => null,
+            setWindowInitStatus: async () => {},
+            updateWindowControlsOverlay: async () => {},
+            sendLog: (msg: string) => console.log("[stub]", msg),
+            onWaveInit: () => {},
+            onBuilderInit: () => {},
+            onFullScreenChange: () => {},
+            onZoomFactorChange: () => {},
+            onUpdaterStatusChange: () => {},
+            onMenuItemAbout: () => {},
+            onReinjectKey: () => {},
+            onControlShiftStateUpdate: () => {},
+            onNavigate: () => {},
+            onIframeNavigate: () => {},
+            onQuicklook: () => {},
+            showContextMenu: () => {},
+            onContextMenuClick: () => {},
+            getAuthKey: () => "stub",
+            getCursorPoint: () => ({ x: 0, y: 0 }),
+            setWebviewFocus: () => {},
+            registerGlobalWebviewKeys: () => {},
+            setKeyboardChordMode: () => {},
+            clearWebviewStorage: async () => {},
+            incrementTermCommands: async () => {},
+            setIsActive: async () => {},
+            getUpdaterStatus: () => ({}),
+            getUpdaterChannel: () => "stable",
+            installAppUpdate: () => {},
+            getAboutModalDetails: () => ({ version: "0.14.5-stub" }),
+            getWebviewPreload: () => "",
+            showWorkspaceAppMenu: () => {},
+            showBuilderAppMenu: () => {},
+            closeWindow: async () => {},
+            getWindowLabels: async () => [],
+            nativePaste: async () => {},
+            doRefresh: () => {},
+            setWaveAIOpen: () => {},
+            closeBuilderWindow: () => {},
+            openBuilder: () => {},
+            setBuilderWindowAppId: () => {},
+        };
+    }
+}, 500);
+
 export {};
