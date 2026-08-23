@@ -203,14 +203,22 @@
 
 .git-diff-empty,
 .git-loading,
-.git-not-repo,
-.git-error,
-.git-clean {
+.git-error {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
+    color: var(--secondary-text-color, #888);
+}
+
+.git-not-repo,
+.git-clean {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 24px 0;
     color: var(--secondary-text-color, #888);
 }
 

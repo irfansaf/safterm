@@ -310,7 +310,19 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
     if (error) {
         return (
             <div className="git-view-container">
-                <div className="git-error">{error}</div>
+                <div className="git-sidebar">
+                    <div className="git-path-bar">
+                        <input
+                            className="git-path-input"
+                            value={pathInput}
+                            onChange={(e) => setPathInput(e.target.value)}
+                            onKeyDown={handlePathSubmit}
+                            placeholder="Repository path..."
+                            spellCheck={false}
+                        />
+                    </div>
+                    <div className="git-error">{error}</div>
+                </div>
             </div>
         );
     }
@@ -318,7 +330,19 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
     if (!status) {
         return (
             <div className="git-view-container">
-                <div className="git-loading">Loading...</div>
+                <div className="git-sidebar">
+                    <div className="git-path-bar">
+                        <input
+                            className="git-path-input"
+                            value={pathInput}
+                            onChange={(e) => setPathInput(e.target.value)}
+                            onKeyDown={handlePathSubmit}
+                            placeholder="Repository path..."
+                            spellCheck={false}
+                        />
+                    </div>
+                    <div className="git-loading">Loading...</div>
+                </div>
             </div>
         );
     }
@@ -326,7 +350,22 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
     if (!status.isrepo) {
         return (
             <div className="git-view-container">
-                <div className="git-not-repo">Not a git repository</div>
+                <div className="git-sidebar">
+                    <div className="git-path-bar">
+                        <input
+                            className="git-path-input"
+                            value={pathInput}
+                            onChange={(e) => setPathInput(e.target.value)}
+                            onKeyDown={handlePathSubmit}
+                            placeholder="Repository path..."
+                            spellCheck={false}
+                        />
+                    </div>
+                    <div className="git-not-repo">Not a git repository</div>
+                </div>
+                <div className="git-diff-panel">
+                    <div className="git-diff-empty">Open a git repository to view changes</div>
+                </div>
             </div>
         );
     }
