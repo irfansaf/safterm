@@ -331,6 +331,7 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
                             placeholder="Repository path..."
                             spellCheck={false}
                         />
+                        <button className="git-browse-btn" onClick={handleBrowse} title="Browse for repository...">…</button>
                     </div>
                     <div className="git-error">{error}</div>
                 </div>
@@ -351,6 +352,7 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
                             placeholder="Repository path..."
                             spellCheck={false}
                         />
+                        <button className="git-browse-btn" onClick={handleBrowse} title="Browse for repository...">…</button>
                     </div>
                     <div className="git-loading">Loading...</div>
                 </div>
@@ -371,6 +373,7 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
                             placeholder="Repository path..."
                             spellCheck={false}
                         />
+                        <button className="git-browse-btn" onClick={handleBrowse} title="Browse for repository...">…</button>
                     </div>
                     <div className="git-not-repo">Not a git repository</div>
                 </div>
