@@ -6,8 +6,9 @@ import type { TabModel } from "@/app/store/tab-model";
 import { TabRpcClient } from "@/app/store/wshrpcutil";
 import type { WaveEnv, WaveEnvSubset } from "@/app/waveenv/waveenv";
 import { globalStore } from "@/store/jotaiStore";
+import * as WOS from "@/store/wos";
 import * as jotai from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./git.scss";
 
 export type GitViewEnv = WaveEnvSubset<{
@@ -19,6 +20,7 @@ export type GitViewEnv = WaveEnvSubset<{
         GitStageAllCommand: WaveEnv["rpc"]["GitStageAllCommand"];
         GitCommitCommand: WaveEnv["rpc"]["GitCommitCommand"];
         GitDiscardCommand: WaveEnv["rpc"]["GitDiscardCommand"];
+        SetMetaCommand: WaveEnv["rpc"]["SetMetaCommand"];
     };
     wos: WaveEnv["wos"];
 }>;
@@ -35,7 +37,7 @@ export class GitViewModel implements ViewModel {
     env: GitViewEnv;
     viewType = "git";
     blockAtom: jotai.Atom<Block>;
-    dirAtom: jotai.Atom<string>;
+    dirAtom: jotai.PrimitiveAtom<string>;
     statusAtom: jotai.PrimitiveAtom<GitStatusData | null>;
     selectedFileAtom: jotai.PrimitiveAtom<SelectedFile>;
     diffTextAtom: jotai.PrimitiveAtom<string>;
@@ -52,10 +54,11 @@ export class GitViewModel implements ViewModel {
         this.tabModel = tabModel;
         this.env = waveEnv as GitViewEnv;
         this.blockAtom = this.env.wos.getWaveObjectAtom<Block>(`block:${blockId}`);
-        this.dirAtom = jotai.atom((get) => {
-            const blockData = get(this.blockAtom);
+        const initialDir = (() => {
+            const blockData = globalStore.get(this.blockAtom);
             return (blockData?.meta?.["git:dir"] as string) || "~";
-        });
+        })();
+        this.dirAtom = jotai.atom(initialDir) as jotai.PrimitiveAtom<string>;
         this.statusAtom = jotai.atom(null) as jotai.PrimitiveAtom<GitStatusData | null>;
         this.selectedFileAtom = jotai.atom(null) as jotai.PrimitiveAtom<SelectedFile>;
         this.diffTextAtom = jotai.atom("");
@@ -100,6 +103,21 @@ export class GitViewModel implements ViewModel {
         } catch (e) {
             globalStore.set(this.errorAtom, `${e.message}`);
         }
+    }
+
+    async setDir(dir: string) {
+        globalStore.set(this.dirAtom, dir);
+        globalStore.set(this.selectedFileAtom, null);
+        globalStore.set(this.diffTextAtom, "");
+        // persist to block meta so tab restore remembers it
+        const blockData = globalStore.get(this.blockAtom);
+        if (blockData) {
+            this.env.rpc.SetMetaCommand(TabRpcClient, {
+                oref: WOS.makeORef("block", this.blockId),
+                meta: { "git:dir": dir } as any,
+            }).catch(() => {});
+        }
+        await this.refresh();
     }
 
     async loadDiff(path: string, staged: boolean) {
@@ -250,16 +268,44 @@ function DiffLine({ line }: { line: string }) {
     return <div className={className}>{line || " "}</div>;
 }
 
+function fuzzyMatch(pattern: string, text: string): boolean {
+    if (!pattern) return true;
+    let pi = 0;
+    for (let ti = 0; ti < text.length && pi < pattern.length; ti++) {
+        if (text[ti].toLowerCase() === pattern[pi].toLowerCase()) pi++;
+    }
+    return pi === pattern.length;
+}
+
 function GitView({ model }: ViewComponentProps<GitViewModel>) {
     const status = jotai.useAtomValue(model.statusAtom);
     const diffText = jotai.useAtomValue(model.diffTextAtom);
     const selected = jotai.useAtomValue(model.selectedFileAtom);
     const error = jotai.useAtomValue(model.errorAtom);
+    const dir = jotai.useAtomValue(model.dirAtom);
     const [commitMsg, setCommitMsg] = jotai.useAtom(model.commitMsgAtom);
+    const [pathInput, setPathInput] = useState(dir);
+    const [fileFilter, setFileFilter] = useState("");
 
     useEffect(() => {
         model.refresh();
     }, []);
+
+    // sync pathInput when dir changes externally
+    useEffect(() => {
+        setPathInput(dir);
+    }, [dir]);
+
+    const handlePathSubmit = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            model.setDir(pathInput);
+        }
+    };
+
+    const filterFiles = (files: GitFileEntry[]): GitFileEntry[] => {
+        if (!fileFilter) return files;
+        return files.filter((f) => fuzzyMatch(fileFilter, f.path));
+    };
 
     if (error) {
         return (
@@ -285,45 +331,81 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
         );
     }
 
-    const hasStaged = status.staged?.length > 0;
+    const hasStaged = (status.staged?.length ?? 0) > 0;
+    const stagedFiles = filterFiles(status.staged ?? []);
+    const unstagedFiles = filterFiles(status.unstaged ?? []);
+    const untrackedFiles = filterFiles(status.untracked ?? []);
 
     return (
         <div className="git-view-container">
             <div className="git-sidebar">
-                {status.staged?.length > 0 && (
+                <div className="git-path-bar">
+                    <input
+                        className="git-path-input"
+                        value={pathInput}
+                        onChange={(e) => setPathInput(e.target.value)}
+                        onKeyDown={handlePathSubmit}
+                        placeholder="Repository path..."
+                        spellCheck={false}
+                    />
+                </div>
+
+                <div className="git-filter-bar">
+                    <input
+                        className="git-filter-input"
+                        value={fileFilter}
+                        onChange={(e) => setFileFilter(e.target.value)}
+                        placeholder="Filter files..."
+                        spellCheck={false}
+                    />
+                    {fileFilter && (
+                        <button
+                            className="git-filter-clear"
+                            onClick={() => setFileFilter("")}
+                            title="Clear filter"
+                        >
+                            ⨯
+                        </button>
+                    )}
+                </div>
+
+                {stagedFiles.length > 0 && (
                     <div className="git-section">
-                        <div className="git-section-header">Staged Changes ({status.staged.length})</div>
-                        {status.staged.map((f) => (
+                        <div className="git-section-header">Staged Changes ({stagedFiles.length})</div>
+                        {stagedFiles.map((f) => (
                             <FileRow key={"s:" + f.path} file={f} staged={true} model={model} />
                         ))}
                     </div>
                 )}
 
-                {status.unstaged?.length > 0 && (
+                {unstagedFiles.length > 0 && (
                     <div className="git-section">
                         <div className="git-section-header">
-                            Changes ({status.unstaged.length})
+                            Changes ({unstagedFiles.length})
                             <button className="git-action-btn" title="Stage All" onClick={() => model.stageAll()}>
                                 Stage All
                             </button>
                         </div>
-                        {status.unstaged.map((f) => (
+                        {unstagedFiles.map((f) => (
                             <FileRow key={"u:" + f.path} file={f} staged={false} model={model} />
                         ))}
                     </div>
                 )}
 
-                {status.untracked?.length > 0 && (
+                {untrackedFiles.length > 0 && (
                     <div className="git-section">
-                        <div className="git-section-header">Untracked ({status.untracked.length})</div>
-                        {status.untracked.map((f) => (
+                        <div className="git-section-header">Untracked ({untrackedFiles.length})</div>
+                        {untrackedFiles.map((f) => (
                             <FileRow key={"n:" + f.path} file={f} staged={false} model={model} />
                         ))}
                     </div>
                 )}
 
-                {!status.staged?.length && !status.unstaged?.length && !status.untracked?.length && (
+                {stagedFiles.length === 0 && unstagedFiles.length === 0 && untrackedFiles.length === 0 && !fileFilter && (
                     <div className="git-clean">Working tree clean</div>
+                )}
+                {stagedFiles.length === 0 && unstagedFiles.length === 0 && untrackedFiles.length === 0 && fileFilter && (
+                    <div className="git-filter-empty">No files match "{fileFilter}"</div>
                 )}
 
                 <div className="git-commit-box">
