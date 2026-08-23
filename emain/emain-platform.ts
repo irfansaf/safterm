@@ -79,8 +79,8 @@ function getWaveHomeDir(): string {
             home = path.join(homeDir, `.${waveDirName}`);
         }
     }
-    // If home exists and it has `wave.lock` in it, we know it has valid data from Wave >=v0.8. Otherwise, it could be for WaveLegacy (<v0.8)
-    if (home && existsSync(home) && existsSync(path.join(home, "wave.lock"))) {
+    // If home exists and it has `saf.lock` in it, we know it has valid data from SafTerm >=v0.8. Otherwise, it could be for WaveLegacy (<v0.8)
+    if (home && existsSync(home) && existsSync(path.join(home, "saf.lock"))) {
         return home;
     }
     return null;

@@ -303,7 +303,7 @@ function createMockFilesystemEntries(): MockFsEntryInput[] {
             `${MockHomePath}/.config/settings.json`,
             JSON.stringify(
                 {
-                    "app:theme": "wave-dark",
+                    "app:theme": "saf-dark",
                     "preview:lastpath": `${MockHomePath}/Documents/meeting-notes.md`,
                     "window:magnifiedblockopacity": 0.92,
                 },

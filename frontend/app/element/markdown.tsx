@@ -226,13 +226,13 @@ function WaveBlock(props: WaveBlockProps) {
     const displayName = block.id.replace(/^"|"$/g, "");
     return (
         <div className="waveblock">
-            <div className="wave-block-content">
-                <div className="wave-block-icon">
+            <div className="saf-block-content">
+                <div className="saf-block-icon">
                     <i className="fas fa-file-code"></i>
                 </div>
-                <div className="wave-block-info">
-                    <span className="wave-block-filename">{displayName}</span>
-                    <span className="wave-block-size">{sizeInKB} KB</span>
+                <div className="saf-block-info">
+                    <span className="saf-block-filename">{displayName}</span>
+                    <span className="saf-block-size">{sizeInKB} KB</span>
                 </div>
             </div>
         </div>

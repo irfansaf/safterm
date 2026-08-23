@@ -503,13 +503,13 @@ func main() {
 	}
 	waveLock, err := wavebase.AcquireWaveLock()
 	if err != nil {
-		log.Printf("error acquiring wave lock (another instance of Wave is likely running): %v\n", err)
+		log.Printf("error acquiring saf lock (another instance of Wave is likely running): %v\n", err)
 		return
 	}
 	defer func() {
 		err = waveLock.Close()
 		if err != nil {
-			log.Printf("error releasing wave lock: %v\n", err)
+			log.Printf("error releasing saf lock: %v\n", err)
 		}
 	}()
 	log.Printf("wave version: %s (%s)\n", WaveVersion, BuildTime)

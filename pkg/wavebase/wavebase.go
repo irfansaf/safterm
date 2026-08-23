@@ -56,15 +56,15 @@ var AppResourcesPath_VarCache string    // caches WAVETERM_RESOURCES_PATH
 var AppElectronExecPath_VarCache string // caches WAVETERM_ELECTRONEXECPATH
 var Dev_VarCache string                 // caches WAVETERM_DEV
 
-const WaveLockFile = "wave.lock"
+const WaveLockFile = "saf.lock"
 const DomainSocketBaseName = "wave.sock"
-const RemoteDomainSocketBaseName = "wave-remote.sock"
+const RemoteDomainSocketBaseName = "safterm-remote.sock"
 const WaveDBDir = "db"
 const ConfigDir = "config"
 const RemoteWaveHomeDirName = ".safterm"
 const RemoteWshBinDirName = "bin"
 const RemoteFullWshBinPath = "~/.safterm/bin/wsh"
-const RemoteFullDomainSocketPath = "~/.safterm/wave-remote.sock"
+const RemoteFullDomainSocketPath = "~/.safterm/safterm-remote.sock"
 
 const AppPathBinDir = "bin"
 

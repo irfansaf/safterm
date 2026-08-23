@@ -117,7 +117,7 @@ declare global {
         setActiveTab: (tabId: string) => void; // set-active-tab
         createTab: () => void; // create-tab
         closeTab: (workspaceId: string, tabId: string, confirmClose: boolean) => Promise<boolean>; // close-tab
-        setWindowInitStatus: (status: "ready" | "wave-ready") => void; // set-window-init-status
+        setWindowInitStatus: (status: "ready" | "saf-ready") => void; // set-window-init-status
         onWaveInit: (callback: (initOpts: WaveInitOpts) => void) => void; // wave-init
         onBuilderInit: (callback: (initOpts: BuilderInitOpts) => void) => void; // builder-init
         sendLog: (log: string) => void; // fe-log

@@ -405,16 +405,16 @@ export function initIpcHandlers() {
         );
     });
 
-    electron.ipcMain.on("set-window-init-status", (event, status: "ready" | "wave-ready") => {
+    electron.ipcMain.on("set-window-init-status", (event, status: "ready" | "saf-ready") => {
         const tabView = getWaveTabViewByWebContentsId(event.sender.id);
         if (tabView != null && tabView.initResolve != null) {
             if (status === "ready") {
                 tabView.initResolve();
                 if (tabView.savedInitOpts) {
                     console.log("savedInitOpts calling wave-init", tabView.waveTabId);
-                    tabView.webContents.send("wave-init", tabView.savedInitOpts);
+                    tabView.webContents.send("saf-init", tabView.savedInitOpts);
                 }
-            } else if (status === "wave-ready") {
+            } else if (status === "saf-ready") {
                 tabView.waveReadyResolve();
             }
             return;

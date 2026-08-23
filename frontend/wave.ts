@@ -114,7 +114,7 @@ async function reinitWave() {
     await WOS.reloadWaveObject<LayoutState>(WOS.makeORef("layout", initialTab.layoutstate));
     reloadAllWorkspaceTabs(ws);
     document.title = `SafTerm - ${initialTab.name}`; // TODO update with tab name change
-    getApi().setWindowInitStatus("wave-ready");
+    getApi().setWindowInitStatus("saf-ready");
     globalStore.set(atoms.reinitVersion, globalStore.get(atoms.reinitVersion) + 1);
     globalStore.set(atoms.updaterStatusAtom, getApi().getUpdaterStatus());
     setTimeout(() => {
@@ -207,7 +207,7 @@ async function initWave(initOpts: WaveInitOpts) {
     root.render(reactElem);
     await firstRenderPromise;
     console.log("Wave First Render Done");
-    getApi().setWindowInitStatus("wave-ready");
+    getApi().setWindowInitStatus("saf-ready");
 }
 
 async function initBuilderWrap(initOpts: BuilderInitOpts) {
