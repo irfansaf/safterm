@@ -107,6 +107,11 @@ type WshRpcInterface interface {
 	GitCommitCommand(ctx context.Context, data CommandGitCommitData) error
 	GitDiscardCommand(ctx context.Context, data CommandGitFileData) error
 
+	// pi-mesh agent panel commands (Irfan Saf addition)
+	MeshStatusCommand(ctx context.Context, data CommandMeshStatusData) (*MeshStatusData, error)
+	MeshSpawnWorkerCommand(ctx context.Context, data CommandMeshSpawnWorkerData) (waveobj.ORef, error)
+	MeshSubmitTaskCommand(ctx context.Context, data CommandMeshSubmitTaskData) (*MeshSubmitTaskRtnData, error)
+
 	// connection functions
 	ConnStatusCommand(ctx context.Context) ([]ConnStatus, error)
 	WslStatusCommand(ctx context.Context) ([]ConnStatus, error)
@@ -611,6 +616,49 @@ type GitStatusData struct {
 	IsRepo    bool           `json:"isrepo"`
 	Ahead     int            `json:"ahead"`
 	Behind    int            `json:"behind"`
+}
+
+// pi-mesh agent panel types (Irfan Saf addition)
+
+type CommandMeshStatusData struct {
+	Dir string `json:"dir"`
+}
+
+type CommandMeshSpawnWorkerData struct {
+	Dir    string   `json:"dir"`
+	TabId  string   `json:"tabid"`
+	Skills []string `json:"skills"`
+}
+
+type CommandMeshSubmitTaskData struct {
+	Dir        string `json:"dir"`
+	Skill      string `json:"skill"`
+	Prompt     string `json:"prompt"`
+	FanOut     bool   `json:"fanout"`
+	MaxWorkers int    `json:"maxworkers"`
+}
+
+type MeshSubmitTaskRtnData struct {
+	TaskId     string   `json:"taskid"`
+	SubTaskIds []string `json:"subtaskids"`
+}
+
+type MeshAgentEntry struct {
+	AgentId      string   `json:"agentid"`
+	Role         string   `json:"role"`
+	Status       string   `json:"status"`
+	Capabilities []string `json:"capabilities"`
+}
+
+type MeshStatusData struct {
+	Running       bool             `json:"running"`
+	Agents        []MeshAgentEntry `json:"agents"`
+	Pending       int              `json:"pending"`
+	Claimed       int              `json:"claimed"`
+	RunningTasks  int              `json:"runningtasks"`
+	Completed     int              `json:"completed"`
+	Failed        int              `json:"failed"`
+	Error         string           `json:"error,omitempty"`
 }
 
 type ActivityDisplayType struct {

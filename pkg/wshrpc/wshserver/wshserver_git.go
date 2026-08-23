@@ -12,10 +12,10 @@ import (
 	"context"
 	"fmt"
 	"os/exec"
-	"path/filepath"
 	"strconv"
 	"strings"
 
+	"github.com/wavetermdev/waveterm/pkg/wavebase"
 	"github.com/wavetermdev/waveterm/pkg/wshrpc"
 )
 
@@ -25,7 +25,7 @@ func runGit(dir string, args ...string) (string, error) {
 	if dir == "" {
 		return "", fmt.Errorf("dir is required")
 	}
-	absDir, err := filepath.Abs(dir)
+	absDir, err := wavebase.ExpandHomeDir(dir)
 	if err != nil {
 		return "", fmt.Errorf("resolving dir: %w", err)
 	}

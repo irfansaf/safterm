@@ -672,6 +672,24 @@ export class RpcApiType {
         return client.wshRpcCall("makedraftfromlocal", data, opts);
     }
 
+    // command "meshspawnworker" [call]
+    MeshSpawnWorkerCommand(client: WshClient, data: CommandMeshSpawnWorkerData, opts?: RpcOpts): Promise<ORef> {
+        if (this.mockClient) return this.mockClient.mockWshRpcCall(client, "meshspawnworker", data, opts);
+        return client.wshRpcCall("meshspawnworker", data, opts);
+    }
+
+    // command "meshstatus" [call]
+    MeshStatusCommand(client: WshClient, data: CommandMeshStatusData, opts?: RpcOpts): Promise<MeshStatusData> {
+        if (this.mockClient) return this.mockClient.mockWshRpcCall(client, "meshstatus", data, opts);
+        return client.wshRpcCall("meshstatus", data, opts);
+    }
+
+    // command "meshsubmittask" [call]
+    MeshSubmitTaskCommand(client: WshClient, data: CommandMeshSubmitTaskData, opts?: RpcOpts): Promise<MeshSubmitTaskRtnData> {
+        if (this.mockClient) return this.mockClient.mockWshRpcCall(client, "meshsubmittask", data, opts);
+        return client.wshRpcCall("meshsubmittask", data, opts);
+    }
+
     // command "message" [call]
     MessageCommand(client: WshClient, data: CommandMessageData, opts?: RpcOpts): Promise<void> {
         if (this.mockClient) return this.mockClient.mockWshRpcCall(client, "message", data, opts);

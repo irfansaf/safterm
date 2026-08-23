@@ -670,6 +670,24 @@ func MakeDraftFromLocalCommand(w *wshutil.WshRpc, data wshrpc.CommandMakeDraftFr
 	return resp, err
 }
 
+// command "meshspawnworker", wshserver.MeshSpawnWorkerCommand
+func MeshSpawnWorkerCommand(w *wshutil.WshRpc, data wshrpc.CommandMeshSpawnWorkerData, opts *wshrpc.RpcOpts) (waveobj.ORef, error) {
+	resp, err := sendRpcRequestCallHelper[waveobj.ORef](w, "meshspawnworker", data, opts)
+	return resp, err
+}
+
+// command "meshstatus", wshserver.MeshStatusCommand
+func MeshStatusCommand(w *wshutil.WshRpc, data wshrpc.CommandMeshStatusData, opts *wshrpc.RpcOpts) (*wshrpc.MeshStatusData, error) {
+	resp, err := sendRpcRequestCallHelper[*wshrpc.MeshStatusData](w, "meshstatus", data, opts)
+	return resp, err
+}
+
+// command "meshsubmittask", wshserver.MeshSubmitTaskCommand
+func MeshSubmitTaskCommand(w *wshutil.WshRpc, data wshrpc.CommandMeshSubmitTaskData, opts *wshrpc.RpcOpts) (*wshrpc.MeshSubmitTaskRtnData, error) {
+	resp, err := sendRpcRequestCallHelper[*wshrpc.MeshSubmitTaskRtnData](w, "meshsubmittask", data, opts)
+	return resp, err
+}
+
 // command "message", wshserver.MessageCommand
 func MessageCommand(w *wshutil.WshRpc, data wshrpc.CommandMessageData, opts *wshrpc.RpcOpts) error {
 	_, err := sendRpcRequestCallHelper[any](w, "message", data, opts)

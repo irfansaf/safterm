@@ -524,6 +524,27 @@ declare global {
         draftappid: string;
     };
 
+    // wshrpc.CommandMeshSpawnWorkerData
+    type CommandMeshSpawnWorkerData = {
+        dir: string;
+        tabid: string;
+        skills: string[];
+    };
+
+    // wshrpc.CommandMeshStatusData
+    type CommandMeshStatusData = {
+        dir: string;
+    };
+
+    // wshrpc.CommandMeshSubmitTaskData
+    type CommandMeshSubmitTaskData = {
+        dir: string;
+        skill: string;
+        prompt: string;
+        fanout: boolean;
+        maxworkers: number;
+    };
+
     // wshrpc.CommandMessageData
     type CommandMessageData = {
         message: string;
@@ -1125,6 +1146,32 @@ declare global {
     type LeafOrderEntry = {
         nodeid: string;
         blockid: string;
+    };
+
+    // wshrpc.MeshAgentEntry
+    type MeshAgentEntry = {
+        agentid: string;
+        role: string;
+        status: string;
+        capabilities: string[];
+    };
+
+    // wshrpc.MeshStatusData
+    type MeshStatusData = {
+        running: boolean;
+        agents: MeshAgentEntry[];
+        pending: number;
+        claimed: number;
+        runningtasks: number;
+        completed: number;
+        failed: number;
+        error?: string;
+    };
+
+    // wshrpc.MeshSubmitTaskRtnData
+    type MeshSubmitTaskRtnData = {
+        taskid: string;
+        subtaskids: string[];
     };
 
     // waveobj.MetaTSType

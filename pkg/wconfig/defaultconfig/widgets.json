@@ -61,5 +61,16 @@
                 "git:dir": "~"
             }
         }
+    },
+    "defwidget@mesh": {
+        "display:order": 1,
+        "icon": "network-wired",
+        "label": "mesh",
+        "blockdef": {
+            "meta": {
+                "view": "mesh",
+                "mesh:dir": "~"
+            }
+        }
     }
 }
