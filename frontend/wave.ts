@@ -1,6 +1,9 @@
 // Copyright 2025, Command Line Inc.
 // SPDX-License-Identifier: Apache-2.0
 
+// Tauri IPC adapter — replaces Electron's window.api with invoke()
+import "./tauri-adapter";
+
 import { App } from "@/app/app";
 import { loadMonaco } from "@/app/monaco/monaco-env";
 import { loadBadges } from "@/app/store/badge";
