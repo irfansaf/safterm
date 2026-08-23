@@ -162,6 +162,13 @@ func (ws *WshServer) MeshSpawnWorkerCommand(ctx context.Context, data wshrpc.Com
 		return waveobj.ORef{}, fmt.Errorf("creating mesh dir: %w", err)
 	}
 
+	// ponytail: delete stale worker scripts so WaveTerm tab restore
+	// doesn't replay old sessions on next launch.
+	staleFiles, _ := filepath.Glob(filepath.Join(meshDir, "_worker_*.py"))
+	for _, f := range staleFiles {
+		os.Remove(f)
+	}
+
 	if err := ensureHubRunning(filepath.Dir(meshDir), socketPath); err != nil {
 		return waveobj.ORef{}, err
 	}
