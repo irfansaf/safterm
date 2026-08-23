@@ -79,7 +79,100 @@ function injectFallbackApi() {
 // Inject BEFORE any app code runs
 (window as any).api = injectFallbackApi();
 
-// ── Detect Tauri runtime (async, upgrades stub if available) ──────
+// ── Stub that simulates the Electron init flow ─────────────────
+// When the app calls setWindowInitStatus("ready"), we fire
+// onWaveInit with mock init options so the app boots normally.
+
+let waveInitCallbacks: Array<(opts: any) => void> = [];
+let builderInitCallbacks: Array<(opts: any) => void> = [];
+
+function fireWaveInit() {
+    const initOpts = {
+        clientId: "tauri-dev-client",
+        tabId: "tauri-dev-tab",
+        windowId: "tauri-dev-window",
+        workspaceId: "tauri-dev-workspace",
+    };
+    waveInitCallbacks.forEach((cb) => cb(initOpts));
+}
+
+// Callbacks that store registered listeners
+let onWaveInitCb: ((opts: any) => void) | null = null;
+let onBuilderInitCb: ((opts: any) => void) | null = null;
+
+function injectFallbackApi() {
+    return {
+        getIsDev: async () => true,
+        getPlatform: async () => "macos",
+        getHomeDir: async () => "~",
+        getDataDir: async () => ".",
+        getConfigDir: async () => ".",
+        getEnv: async () => "",
+        getUserName: async () => "dev",
+        getHostName: async () => "localhost",
+        getZoomFactor: async () => 1.0,
+        openNewWindow: async () => {},
+        createWorkspace: async () => {},
+        switchWorkspace: async () => {},
+        deleteWorkspace: async () => {},
+        closeTab: async () => true,
+        openExternal: () => {},
+        openNativePath: () => {},
+        getPathForFile: (p: string | null) => p ?? "",
+        saveTextFile: async () => false,
+        downloadFile: () => {},
+        captureScreenshot: async () => "",
+        showOpenDialog: async () => null,
+        // This is the key one — fires wave init
+        setWindowInitStatus: async (status: string) => {
+            if (status === "ready" && onWaveInitCb) {
+                setTimeout(() => onWaveInitCb!({
+                    clientId: "tauri-dev-client",
+                    tabId: "tauri-dev-tab",
+                    windowId: "tauri-dev-window",
+                }), 0);
+            }
+        },
+        updateWindowControlsOverlay: async () => {},
+        sendLog: (msg: string) => console.log("[stub]", msg),
+        onWaveInit: (cb: (opts: any) => void) => { onWaveInitCb = cb; },
+        onBuilderInit: (cb: (opts: any) => void) => { onBuilderInitCb = cb; },
+        onFullScreenChange: () => {},
+        onZoomFactorChange: () => {},
+        onUpdaterStatusChange: () => {},
+        onMenuItemAbout: () => {},
+        onReinjectKey: () => {},
+        onControlShiftStateUpdate: () => {},
+        onNavigate: () => {},
+        onIframeNavigate: () => {},
+        onQuicklook: () => {},
+        showContextMenu: () => {},
+        onContextMenuClick: () => {},
+        getAuthKey: () => "stub",
+        getCursorPoint: () => ({ x: 0, y: 0 }),
+        setWebviewFocus: () => {},
+        registerGlobalWebviewKeys: () => {},
+        setKeyboardChordMode: () => {},
+        clearWebviewStorage: async () => {},
+        incrementTermCommands: async () => {},
+        setIsActive: async () => {},
+        getUpdaterStatus: () => ({}),
+        getUpdaterChannel: () => "stable",
+        installAppUpdate: () => {},
+        getAboutModalDetails: () => ({ version: "0.14.5" }),
+        getWebviewPreload: () => "",
+        showWorkspaceAppMenu: () => {},
+        showBuilderAppMenu: () => {},
+        closeWindow: async () => {},
+        getWindowLabels: async () => [],
+        nativePaste: async () => {},
+        doRefresh: () => {},
+        setWaveAIOpen: () => {},
+        closeBuilderWindow: () => {},
+        openBuilder: () => {},
+        setBuilderWindowAppId: () => {},
+    };
+}
 
 async function setupTauri() {
     try {
