@@ -73,6 +73,7 @@ contextBridge.exposeInMainWorld("api", {
     getPathForFile: (file: File): string => webUtils.getPathForFile(file),
     saveTextFile: (fileName: string, content: string) => ipcRenderer.invoke("save-text-file", fileName, content),
     setIsActive: () => ipcRenderer.invoke("set-is-active"),
+    showOpenDialog: (opts: any) => ipcRenderer.invoke("show-open-dialog", opts),
 });
 
 // Custom event for "new-window"

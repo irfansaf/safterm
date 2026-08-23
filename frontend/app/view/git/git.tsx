@@ -302,6 +302,17 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
         }
     };
 
+    const handleBrowse = async () => {
+        const dir = await (window as any).api.showOpenDialog({
+            title: "Select Git Repository",
+            defaultPath: pathInput,
+        });
+        if (dir) {
+            setPathInput(dir);
+            model.setDir(dir);
+        }
+    };
+
     const filterFiles = (files: GitFileEntry[]): GitFileEntry[] => {
         if (!fileFilter) return files;
         return files.filter((f) => fuzzyMatch(fileFilter, f.path));
@@ -387,6 +398,9 @@ function GitView({ model }: ViewComponentProps<GitViewModel>) {
                         placeholder="Repository path..."
                         spellCheck={false}
                     />
+                    <button className="git-browse-btn" onClick={handleBrowse} title="Browse for repository...">
+                        …
+                    </button>
                 </div>
 
                 <div className="git-filter-bar">

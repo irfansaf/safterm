@@ -136,6 +136,7 @@ declare global {
         getPathForFile: (file: File) => string; // webUtils.getPathForFile
         saveTextFile: (fileName: string, content: string) => Promise<boolean>; // save-text-file
         setIsActive: () => Promise<void>; // set-is-active
+        showOpenDialog: (opts?: { title?: string; defaultPath?: string }) => Promise<string | null>; // show-open-dialog
     };
 
     type ElectronContextMenuItem = {
