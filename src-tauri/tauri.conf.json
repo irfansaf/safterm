@@ -6,7 +6,7 @@
   "build": {
     "frontendDist": "dist/frontend",
     "devUrl": "http://localhost:5173",
-    "beforeDevCommand": "npm run build:frontend:dev",
+    "beforeDevCommand": "npx vite --config vite.tauri.config.ts --port 5173",
     "beforeBuildCommand": "npm run build:frontend:dev"
   },
   "app": {

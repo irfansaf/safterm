@@ -25,7 +25,7 @@
         "build:dev": "electron-vite build --mode development",
         "build:prod": "electron-vite build --mode production",
         "build:frontend:dev": "vite build --config vite.tauri.config.ts --mode development",
-        "tauri:dev": "tauri dev",
+        "tauri:dev": "tauri dev --no-dev-server",
         "tauri:build": "tauri build",
         "coverage": "vitest run --coverage",
         "test": "vitest",
