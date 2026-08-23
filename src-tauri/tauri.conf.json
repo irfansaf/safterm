@@ -1,0 +1,60 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "SafTerm",
+  "version": "0.14.5",
+  "identifier": "dev.irfansaf.safterm",
+  "build": {
+    "frontendDist": "dist/frontend",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm run build:frontend:dev",
+    "beforeBuildCommand": "npm run build:frontend:dev"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "SafTerm",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 600,
+        "minHeight": 400,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "DeveloperTool",
+    "copyright": "Copyright 2026, Irfan Saf",
+    "shortDescription": "Open-Source AI-Native Terminal Built for Seamless Workflows",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {
+    "shell": {
+      "open": true
+    },
+    "dialog": {
+      "open": true
+    },
+    "updater": {
+      "endpoints": [],
+      "active": false
+    },
+    "fs": {
+      "scope": {
+        "allow": ["$HOME/**", "$TEMP/**"],
+        "deny": []
+      }
+    }
+  }
+}

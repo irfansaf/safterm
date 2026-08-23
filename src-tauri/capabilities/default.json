@@ -1,0 +1,14 @@
+{
+  "identifier": "default",
+  "description": "Default capabilities for SafTerm",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "shell:default",
+    "shell:allow-open",
+    "dialog:default",
+    "dialog:allow-open",
+    "fs:default",
+    "updater:default"
+  ]
+}

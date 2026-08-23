@@ -62,17 +62,17 @@ const config = {
         entitlements: "build/entitlements.mac.plist",
         entitlementsInherit: "build/entitlements.mac.plist",
         extendInfo: {
-            NSContactsUsageDescription: "A CLI application running in Wave wants to use your contacts.",
-            NSRemindersUsageDescription: "A CLI application running in Wave wants to use your reminders.",
+            NSContactsUsageDescription: "A CLI application running in SafTerm wants to use your contacts.",
+            NSRemindersUsageDescription: "A CLI application running in SafTerm wants to use your reminders.",
             NSLocationWhenInUseUsageDescription:
-                "A CLI application running in Wave wants to use your location information while active.",
+                "A CLI application running in SafTerm wants to use your location information while active.",
             NSLocationAlwaysUsageDescription:
-                "A CLI application running in Wave wants to use your location information, even in the background.",
-            NSCameraUsageDescription: "A CLI application running in Wave wants to use the camera.",
-            NSMicrophoneUsageDescription: "A CLI application running in Wave wants to use your microphone.",
-            NSCalendarsUsageDescription: "A CLI application running in Wave wants to use Calendar data.",
-            NSLocationUsageDescription: "A CLI application running in Wave wants to use your location information.",
-            NSAppleEventsUsageDescription: "A CLI application running in Wave wants to use AppleScript.",
+                "A CLI application running in SafTerm wants to use your location information, even in the background.",
+            NSCameraUsageDescription: "A CLI application running in SafTerm wants to use the camera.",
+            NSMicrophoneUsageDescription: "A CLI application running in SafTerm wants to use your microphone.",
+            NSCalendarsUsageDescription: "A CLI application running in SafTerm wants to use Calendar data.",
+            NSLocationUsageDescription: "A CLI application running in SafTerm wants to use your location information.",
+            NSAppleEventsUsageDescription: "A CLI application running in SafTerm wants to use AppleScript.",
         },
     },
     linux: {
@@ -99,8 +99,8 @@ const config = {
         target: ["nsis", "msi", "zip"],
         signtoolOptions: windowsShouldSign && {
             signingHashAlgorithms: ["sha256"],
-            publisherName: "Command Line Inc",
-            certificateSubjectName: "Command Line Inc",
+            publisherName: "Irfan Saf",
+            certificateSubjectName: "Irfan Saf",
             certificateSha1: process.env.SM_CODE_SIGNING_CERT_SHA1_HASH,
         },
     },
@@ -119,7 +119,7 @@ const config = {
     },
     publish: {
         provider: "generic",
-        url: "https://dl.waveterm.dev/releases-w2",
+        url: "https://github.com/irfansaf/safterm/releases",
     },
     afterPack: (context) => {
         // This is a workaround to restore file permissions to the wavesrv binaries on macOS after packaging the universal binary.
