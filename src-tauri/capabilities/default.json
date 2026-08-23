@@ -7,8 +7,6 @@
     "shell:default",
     "shell:allow-open",
     "dialog:default",
-    "dialog:allow-open",
-    "fs:default",
-    "updater:default"
+    "fs:default"
   ]
 }

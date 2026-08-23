@@ -38,23 +38,5 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  },
-  "plugins": {
-    "shell": {
-      "open": true
-    },
-    "dialog": {
-      "open": true
-    },
-    "updater": {
-      "endpoints": [],
-      "active": false
-    },
-    "fs": {
-      "scope": {
-        "allow": ["$HOME/**", "$TEMP/**"],
-        "deny": []
-      }
-    }
   }
 }

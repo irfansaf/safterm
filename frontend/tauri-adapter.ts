@@ -4,6 +4,10 @@
 // The frontend (WaveEnv) expects `window.api` to have ElectronApi shape.
 
 import { invoke } from "@tauri-apps/api/core";
+import { initTauriEvents } from "./tauri-events";
+
+// Initialize Tauri event listeners (fullscreen, updater, etc.)
+initTauriEvents();
 
 interface TauriApi {
     getIsDev: () => Promise<boolean>;
