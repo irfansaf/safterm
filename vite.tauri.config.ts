@@ -8,8 +8,6 @@ export default defineConfig({
     plugins: [react(), svgr()],
     resolve: {
         alias: {
-            // No wildcard "@" — use explicit prefixes matching tsconfig paths.
-            // Order matters: most specific first.
             "@/store": path.resolve(__dirname, "frontend/app/store"),
             "@/app": path.resolve(__dirname, "frontend/app"),
             "@/builder": path.resolve(__dirname, "frontend/builder"),
@@ -24,9 +22,6 @@ export default defineConfig({
     },
     build: {
         outDir: "dist/frontend",
-        rollupOptions: {
-            external: ["@tauri-apps/api/core"],
-        },
     },
     server: {
         port: 5173,
