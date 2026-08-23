@@ -12,15 +12,15 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/wavetermdev/waveterm/pkg/eventbus"
-	"github.com/wavetermdev/waveterm/pkg/telemetry"
-	"github.com/wavetermdev/waveterm/pkg/telemetry/telemetrydata"
-	"github.com/wavetermdev/waveterm/pkg/util/utilfn"
-	"github.com/wavetermdev/waveterm/pkg/waveobj"
-	"github.com/wavetermdev/waveterm/pkg/wconfig"
-	"github.com/wavetermdev/waveterm/pkg/wps"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
-	"github.com/wavetermdev/waveterm/pkg/wstore"
+	"github.com/irfansaf/safterm/pkg/eventbus"
+	"github.com/irfansaf/safterm/pkg/telemetry"
+	"github.com/irfansaf/safterm/pkg/telemetry/telemetrydata"
+	"github.com/irfansaf/safterm/pkg/util/utilfn"
+	"github.com/irfansaf/safterm/pkg/waveobj"
+	"github.com/irfansaf/safterm/pkg/wconfig"
+	"github.com/irfansaf/safterm/pkg/wps"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wstore"
 )
 
 var WorkspaceColors = [...]string{

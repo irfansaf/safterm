@@ -6,8 +6,8 @@ package wshserver
 import (
 	"sync"
 
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
-	"github.com/wavetermdev/waveterm/pkg/wshutil"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wshutil"
 )
 
 const (

@@ -12,10 +12,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/wavetermdev/waveterm/pkg/remote/connparse"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc/wshclient"
-	"github.com/wavetermdev/waveterm/pkg/wshutil"
+	"github.com/irfansaf/safterm/pkg/remote/connparse"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wshrpc/wshclient"
+	"github.com/irfansaf/safterm/pkg/wshutil"
 )
 
 const (

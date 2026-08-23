@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/wavebase"
 	"golang.org/x/sys/unix"
 )
 

@@ -11,12 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wavetermdev/waveterm/pkg/aiusechat/uctypes"
-	"github.com/wavetermdev/waveterm/pkg/blockcontroller"
-	"github.com/wavetermdev/waveterm/pkg/util/utilfn"
-	"github.com/wavetermdev/waveterm/pkg/waveobj"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
-	"github.com/wavetermdev/waveterm/pkg/wstore"
+	"github.com/irfansaf/safterm/pkg/aiusechat/uctypes"
+	"github.com/irfansaf/safterm/pkg/blockcontroller"
+	"github.com/irfansaf/safterm/pkg/util/utilfn"
+	"github.com/irfansaf/safterm/pkg/waveobj"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wstore"
 )
 
 func getTsunamiShortDesc(rtInfo *waveobj.ObjRTInfo) string {

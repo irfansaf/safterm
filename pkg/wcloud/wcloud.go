@@ -17,10 +17,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wavetermdev/waveterm/pkg/telemetry"
-	"github.com/wavetermdev/waveterm/pkg/telemetry/telemetrydata"
-	"github.com/wavetermdev/waveterm/pkg/util/daystr"
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/telemetry"
+	"github.com/irfansaf/safterm/pkg/telemetry/telemetrydata"
+	"github.com/irfansaf/safterm/pkg/util/daystr"
+	"github.com/irfansaf/safterm/pkg/wavebase"
 )
 
 const WCloudEndpoint = "http://localhost/disabled"

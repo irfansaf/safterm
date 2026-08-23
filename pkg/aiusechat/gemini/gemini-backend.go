@@ -17,12 +17,12 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/launchdarkly/eventsource"
-	"github.com/wavetermdev/waveterm/pkg/aiusechat/aiutil"
-	"github.com/wavetermdev/waveterm/pkg/aiusechat/chatstore"
-	"github.com/wavetermdev/waveterm/pkg/aiusechat/uctypes"
-	"github.com/wavetermdev/waveterm/pkg/util/utilfn"
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
-	"github.com/wavetermdev/waveterm/pkg/web/sse"
+	"github.com/irfansaf/safterm/pkg/aiusechat/aiutil"
+	"github.com/irfansaf/safterm/pkg/aiusechat/chatstore"
+	"github.com/irfansaf/safterm/pkg/aiusechat/uctypes"
+	"github.com/irfansaf/safterm/pkg/util/utilfn"
+	"github.com/irfansaf/safterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/web/sse"
 )
 
 // ensureAltSse ensures the ?alt=sse query parameter is set on the endpoint

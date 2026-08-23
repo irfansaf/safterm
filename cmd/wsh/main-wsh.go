@@ -4,8 +4,8 @@
 package main
 
 import (
-	"github.com/wavetermdev/waveterm/cmd/wsh/cmd"
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/cmd/wsh/cmd"
+	"github.com/irfansaf/safterm/pkg/wavebase"
 )
 
 // set by main-server.go

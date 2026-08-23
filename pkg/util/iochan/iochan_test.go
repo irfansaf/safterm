@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/wavetermdev/waveterm/pkg/util/iochan"
+	"github.com/irfansaf/safterm/pkg/util/iochan"
 )
 
 const (

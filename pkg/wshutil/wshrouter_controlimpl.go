@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/wavetermdev/waveterm/pkg/baseds"
-	"github.com/wavetermdev/waveterm/pkg/util/shellutil"
-	"github.com/wavetermdev/waveterm/pkg/util/utilfn"
-	"github.com/wavetermdev/waveterm/pkg/waveobj"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
-	"github.com/wavetermdev/waveterm/pkg/wstore"
+	"github.com/irfansaf/safterm/pkg/baseds"
+	"github.com/irfansaf/safterm/pkg/util/shellutil"
+	"github.com/irfansaf/safterm/pkg/util/utilfn"
+	"github.com/irfansaf/safterm/pkg/waveobj"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wstore"
 )
 
 type WshRouterControlImpl struct {

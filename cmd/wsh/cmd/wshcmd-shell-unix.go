@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/wavetermdev/waveterm/pkg/util/shellutil"
+	"github.com/irfansaf/safterm/pkg/util/shellutil"
 )
 
 func init() {

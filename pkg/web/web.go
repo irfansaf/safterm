@@ -20,17 +20,17 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
-	"github.com/wavetermdev/waveterm/pkg/aiusechat"
-	"github.com/wavetermdev/waveterm/pkg/authkey"
-	"github.com/wavetermdev/waveterm/pkg/filestore"
-	"github.com/wavetermdev/waveterm/pkg/panichandler"
-	"github.com/wavetermdev/waveterm/pkg/remote/fileshare/wshfs"
-	"github.com/wavetermdev/waveterm/pkg/schema"
-	"github.com/wavetermdev/waveterm/pkg/service"
-	"github.com/wavetermdev/waveterm/pkg/util/fileutil"
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc/wshclient"
+	"github.com/irfansaf/safterm/pkg/aiusechat"
+	"github.com/irfansaf/safterm/pkg/authkey"
+	"github.com/irfansaf/safterm/pkg/filestore"
+	"github.com/irfansaf/safterm/pkg/panichandler"
+	"github.com/irfansaf/safterm/pkg/remote/fileshare/wshfs"
+	"github.com/irfansaf/safterm/pkg/schema"
+	"github.com/irfansaf/safterm/pkg/service"
+	"github.com/irfansaf/safterm/pkg/util/fileutil"
+	"github.com/irfansaf/safterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wshrpc/wshclient"
 )
 
 type WebFnType = func(http.ResponseWriter, *http.Request)

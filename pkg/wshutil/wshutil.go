@@ -18,14 +18,14 @@ import (
 	"sync/atomic"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/wavetermdev/waveterm/pkg/baseds"
-	"github.com/wavetermdev/waveterm/pkg/panichandler"
-	"github.com/wavetermdev/waveterm/pkg/util/packetparser"
-	"github.com/wavetermdev/waveterm/pkg/util/shellutil"
-	"github.com/wavetermdev/waveterm/pkg/util/utilfn"
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
-	"github.com/wavetermdev/waveterm/pkg/wavejwt"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/baseds"
+	"github.com/irfansaf/safterm/pkg/panichandler"
+	"github.com/irfansaf/safterm/pkg/util/packetparser"
+	"github.com/irfansaf/safterm/pkg/util/shellutil"
+	"github.com/irfansaf/safterm/pkg/util/utilfn"
+	"github.com/irfansaf/safterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/wavejwt"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
 )
 
 // these should both be 5 characters

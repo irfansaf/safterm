@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/wavetermdev/waveterm/tsunami/app"
-	"github.com/wavetermdev/waveterm/tsunami/vdom"
+	"github.com/irfansaf/safterm/tsunami/app"
+	"github.com/irfansaf/safterm/tsunami/vdom"
 )
 
 var AppMeta = app.AppMeta{
@@ -28,7 +28,7 @@ var (
 		Min:   app.Ptr(1.0),
 		Max:   app.Ptr(300.0),
 	})
-	repositoryAtom = app.ConfigAtom("repository", "wavetermdev/waveterm", &app.AtomMeta{
+	repositoryAtom = app.ConfigAtom("repository", "irfansaf/safterm", &app.AtomMeta{
 		Desc:    "GitHub repository in owner/repo format",
 		Pattern: `^[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+$`,
 	})

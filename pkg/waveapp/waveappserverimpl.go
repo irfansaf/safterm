@@ -10,9 +10,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/wavetermdev/waveterm/pkg/panichandler"
-	"github.com/wavetermdev/waveterm/pkg/vdom"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/panichandler"
+	"github.com/irfansaf/safterm/pkg/vdom"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
 )
 
 type WaveAppServerImpl struct {

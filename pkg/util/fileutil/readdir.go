@@ -11,8 +11,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/wavetermdev/waveterm/pkg/util/utilfn"
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/util/utilfn"
+	"github.com/irfansaf/safterm/pkg/wavebase"
 )
 
 type DirEntryOut struct {

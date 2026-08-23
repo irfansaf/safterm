@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
 )
 
 type mockRpcInterface struct {

@@ -1,4 +1,4 @@
-module github.com/wavetermdev/waveterm
+module github.com/irfansaf/safterm
 
 go 1.25.6
 
@@ -16,6 +16,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/invopop/jsonschema v0.13.0
+	github.com/irfansaf/safterm/tsunami v0.12.3
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/junegunn/fzf v0.65.2
@@ -30,7 +31,6 @@ require (
 	github.com/spf13/cobra v1.10.2
 	github.com/ubuntu/gowsl v0.0.0-20240906163211-049fd49bd93b
 	github.com/wavetermdev/htmltoken v0.2.0
-	github.com/wavetermdev/waveterm/tsunami v0.12.3
 	golang.org/x/crypto v0.52.0
 	golang.org/x/mod v0.35.0
 	golang.org/x/sync v0.20.0
@@ -90,4 +90,4 @@ replace github.com/kevinburke/ssh_config => github.com/wavetermdev/ssh_config v0
 
 replace github.com/creack/pty => github.com/photostorm/pty v1.1.19-0.20230903182454-31354506054b
 
-replace github.com/wavetermdev/waveterm/tsunami => ./tsunami
+replace github.com/irfansaf/safterm/tsunami => ./tsunami

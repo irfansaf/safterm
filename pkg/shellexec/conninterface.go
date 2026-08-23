@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"github.com/creack/pty"
-	"github.com/wavetermdev/waveterm/pkg/panichandler"
-	"github.com/wavetermdev/waveterm/pkg/util/unixutil"
-	"github.com/wavetermdev/waveterm/pkg/wsl"
+	"github.com/irfansaf/safterm/pkg/panichandler"
+	"github.com/irfansaf/safterm/pkg/util/unixutil"
+	"github.com/irfansaf/safterm/pkg/wsl"
 	"golang.org/x/crypto/ssh"
 )
 

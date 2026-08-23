@@ -9,7 +9,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/wavetermdev/waveterm/pkg/baseds"
+	"github.com/irfansaf/safterm/pkg/baseds"
 )
 
 const (

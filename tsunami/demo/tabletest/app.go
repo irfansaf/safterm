@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/wavetermdev/waveterm/tsunami/app"
-	"github.com/wavetermdev/waveterm/tsunami/ui"
-	"github.com/wavetermdev/waveterm/tsunami/vdom"
+	"github.com/irfansaf/safterm/tsunami/app"
+	"github.com/irfansaf/safterm/tsunami/ui"
+	"github.com/irfansaf/safterm/tsunami/vdom"
 )
 
 var AppMeta = app.AppMeta{

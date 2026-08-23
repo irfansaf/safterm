@@ -15,8 +15,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/wavetermdev/waveterm/pkg/wavebase"
-	"github.com/wavetermdev/waveterm/pkg/wshrpc"
+	"github.com/irfansaf/safterm/pkg/wavebase"
+	"github.com/irfansaf/safterm/pkg/wshrpc"
 )
 
 // runGit executes git in the given directory and returns stdout.

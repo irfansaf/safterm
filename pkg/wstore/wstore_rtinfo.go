@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/wavetermdev/waveterm/pkg/waveobj"
+	"github.com/irfansaf/safterm/pkg/waveobj"
 )
 
 var (
