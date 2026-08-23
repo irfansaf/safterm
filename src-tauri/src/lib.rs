@@ -2,7 +2,11 @@
 //
 // Replaces emain/*.ts with a native Rust shell.
 
+mod appcommands;
 mod commands;
+mod filesystem;
+mod screenshot;
+mod windows;
 
 use std::fs;
 use std::io::Write;
@@ -84,7 +88,15 @@ pub fn run() {
             is_ready: Mutex::new(false),
         })
         .invoke_handler(tauri::generate_handler![
+            // Window management
             commands::create_new_window,
+            windows::open_new_window,
+            windows::close_window,
+            windows::get_window_labels,
+            windows::maximize_window,
+            windows::minimize_window,
+            windows::fullscreen_window,
+            // App info
             commands::get_is_dev,
             commands::get_platform,
             commands::get_home_dir,
@@ -93,7 +105,20 @@ pub fn run() {
             commands::get_env,
             commands::get_user_name,
             commands::get_host_name,
+            // File operations
             commands::browse_folder,
+            filesystem::download_file,
+            filesystem::save_text_file,
+            filesystem::open_native_path,
+            filesystem::get_path_for_file,
+            // App
+            appcommands::native_paste,
+            appcommands::do_refresh,
+            appcommands::set_keyboard_chord_mode,
+            appcommands::increment_term_commands,
+            appcommands::clear_webview_storage,
+            screenshot::capture_screenshot,
+            // External
             commands::open_external,
             commands::set_window_title,
         ])
