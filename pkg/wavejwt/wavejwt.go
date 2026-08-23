@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	IssuerWaveTerm = "waveterm"
+	IssuerWaveTerm = "safterm"
 )
 
 var (

@@ -19,7 +19,7 @@ import (
 	dbfs "github.com/wavetermdev/waveterm/db"
 )
 
-const WStoreDBName = "waveterm.db"
+const WStoreDBName = "safterm.db"
 
 type TxWrap = txwrap.TxWrap
 

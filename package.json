@@ -1,16 +1,16 @@
 {
-    "name": "waveterm",
+    "name": "safterm",
     "author": {
-        "name": "Command Line Inc",
-        "email": "info@commandline.dev"
+        "name": "Irfan Saf",
+        "email": "irfansaf@users.noreply.github.com"
     },
-    "productName": "Wave",
+    "productName": "SafTerm",
     "description": "Open-Source AI-Native Terminal Built for Seamless Workflows",
     "license": "Apache-2.0",
     "version": "0.14.5",
-    "homepage": "https://waveterm.dev",
+    "homepage": "https://github.com/irfansaf/safterm",
     "build": {
-        "appId": "dev.commandline.waveterm"
+        "appId": "dev.irfansaf.safterm"
     },
     "private": true,
     "main": "./dist/main/index.js",

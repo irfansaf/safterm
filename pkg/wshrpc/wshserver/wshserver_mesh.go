@@ -5,8 +5,8 @@ package wshserver
 
 // implementation of pi-mesh agent panel commands
 // shells out to `pi-mesh-cli` (status/submit-task) and `pi-mesh-hub` (auto-start),
-// and spawns worker agents as regular WaveTerm terminal blocks — no new
-// dependency on grpc inside waveterm itself.
+// and spawns worker agents as regular SafTerm terminal blocks — no new
+// dependency on grpc inside safterm itself.
 
 import (
 	"context"
@@ -162,7 +162,7 @@ func (ws *WshServer) MeshSpawnWorkerCommand(ctx context.Context, data wshrpc.Com
 		return waveobj.ORef{}, fmt.Errorf("creating mesh dir: %w", err)
 	}
 
-	// ponytail: delete stale worker scripts so WaveTerm tab restore
+	// ponytail: delete stale worker scripts so SafTerm tab restore
 	// doesn't replay old sessions on next launch.
 	staleFiles, _ := filepath.Glob(filepath.Join(meshDir, "_worker_*.py"))
 	for _, f := range staleFiles {
@@ -198,7 +198,7 @@ asyncio.run(_run())
 		return waveobj.ORef{}, fmt.Errorf("writing worker script: %w", err)
 	}
 
-	// cmd:shell defaults to true in WaveTerm's controller, which runs cmd
+	// cmd:shell defaults to true in SafTerm's controller, which runs cmd
 	// as shell syntax and ignores cmd:args entirely. Build a single
 	// shell-quoted command string instead of relying on cmd:args.
 	fullCmd := fmt.Sprintf("%s %s", utilfn.ShellQuote(pythonBin, false, -1), utilfn.ShellQuote(scriptPath, false, -1))
