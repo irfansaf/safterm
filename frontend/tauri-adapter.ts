@@ -3,18 +3,27 @@
 // Injects window.api before any app code runs, then upgrades
 // to real Tauri IPC if available.
 
-// ── Callbacks ─────────────────────────────────────────────────────
+// ── Synchronous fallback (runs before any imports) ───────────────
+// Inject ws endpoint as a sync property so getEnv() in the app works
+// without async invoke. Wavesrv prints WAVESRV-ESTART with the port;
+// for dev we'll use a default. The Tauri upgrade will set the real one.
+
+(window as any).__SAFTERM_ENV = {
+    WAVE_SERVER_WS_ENDPOINT: "127.0.0.1:8999",
+    WAVE_SERVER_WEB_ENDPOINT: "127.0.0.1:8999",
+};
+
 let onWaveInitCb: ((opts: any) => void) | null = null;
 let onBuilderInitCb: ((opts: any) => void) | null = null;
-
-// ── Synchronous fallback (runs before any imports) ───────────────
 (window as any).api = {
     getIsDev: async () => true,
     getPlatform: async () => "macos",
     getHomeDir: async () => "~",
     getDataDir: async () => ".",
     getConfigDir: async () => ".",
-    getEnv: async () => "",
+    getEnv: (varName: string) => {
+        return (window as any).__SAFTERM_ENV[varName] ?? "";
+    },
     getUserName: async () => "dev",
     getHostName: async () => "localhost",
     getZoomFactor: async () => 1.0,
