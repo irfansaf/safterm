@@ -15,7 +15,20 @@ const WaveAuthKeyEnv = "WAVETERM_AUTH_KEY"
 const AuthKeyHeader = "X-AuthKey"
 
 func ValidateIncomingRequest(r *http.Request) error {
+	return validate(r, r.Header.Get(AuthKeyHeader))
+}
+
+// ValidateIncomingWebSocketRequest supports the Tauri WebView, whose native
+// WebSocket API cannot set custom headers.
+func ValidateIncomingWebSocketRequest(r *http.Request) error {
 	reqAuthKey := r.Header.Get(AuthKeyHeader)
+	if reqAuthKey == "" {
+		reqAuthKey = r.URL.Query().Get("authkey")
+	}
+	return validate(r, reqAuthKey)
+}
+
+func validate(r *http.Request, reqAuthKey string) error {
 	if reqAuthKey == "" {
 		return fmt.Errorf("no x-authkey header")
 	}

@@ -255,7 +255,7 @@ func HandleWsInternal(w http.ResponseWriter, r *http.Request) error {
 	if stableId == "" {
 		return fmt.Errorf("stableid is required")
 	}
-	err := authkey.ValidateIncomingRequest(r)
+	err := authkey.ValidateIncomingWebSocketRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(fmt.Sprintf("error validating authkey: %v", err)))

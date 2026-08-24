@@ -1,11 +1,19 @@
 // SafTerm — Vite config for Tauri build
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
 import path from "path";
 
 export default defineConfig({
-    plugins: [react(), svgr()],
+    plugins: [
+        svgr({
+            svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
+            include: "**/*.svg",
+        }),
+        tailwindcss(),
+        react(),
+    ],
     resolve: {
         alias: {
             "@/store": path.resolve(__dirname, "frontend/app/store"),

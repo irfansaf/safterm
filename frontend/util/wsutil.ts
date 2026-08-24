@@ -19,9 +19,12 @@ type ComboWebSocket = NodeWebSocketType | WebSocket;
 function newWebSocket(url: string, headers: { [key: string]: string }): ComboWebSocket {
     if (NodeWebSocket) {
         return new NodeWebSocket(url, { headers });
-    } else {
-        return new WebSocket(url);
     }
+    const authKey = headers?.["X-AuthKey"];
+    if (authKey) {
+        url += `${url.includes("?") ? "&" : "?"}authkey=${encodeURIComponent(authKey)}`;
+    }
+    return new WebSocket(url);
 }
 
 export { newWebSocket };

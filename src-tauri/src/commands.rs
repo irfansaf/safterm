@@ -5,12 +5,31 @@
 /// the original Electron preload/IPC bridge.
 
 use std::path::PathBuf;
-use std::sync::Mutex;
+use std::process::Child;
+use std::sync::{Arc, Mutex};
 
-use tauri::Manager;
+use serde::Serialize;
+use tauri::{Manager, State};
+
+#[derive(Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WavesrvEndpoint {
+    pub ws: String,
+    pub web: String,
+    pub client_id: Option<String>,
+    pub window_id: Option<String>,
+    pub tab_id: Option<String>,
+}
 
 pub struct WavesrvState {
     pub is_ready: Mutex<bool>,
+    pub endpoint: Arc<Mutex<Option<WavesrvEndpoint>>>,
+    pub child: Mutex<Option<Child>>,
+}
+
+#[tauri::command]
+pub fn get_wavesrv_endpoint(state: State<'_, WavesrvState>) -> Option<WavesrvEndpoint> {
+    state.endpoint.lock().ok()?.clone()
 }
 
 #[tauri::command]

@@ -13,7 +13,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/irfansaf/safterm/pkg/aiusechat"
 	"github.com/irfansaf/safterm/pkg/authkey"
 	"github.com/irfansaf/safterm/pkg/blockcontroller"
@@ -46,6 +45,7 @@ import (
 	"github.com/irfansaf/safterm/pkg/wshutil"
 	"github.com/irfansaf/safterm/pkg/wslconn"
 	"github.com/irfansaf/safterm/pkg/wstore"
+	"github.com/joho/godotenv"
 
 	"net/http"
 	_ "net/http/pprof"
@@ -422,6 +422,28 @@ func grabAndRemoveEnvVars() error {
 	return nil
 }
 
+func logInitialState() {
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	client, err := wcore.GetClientData(ctx)
+	if err != nil || len(client.WindowIds) == 0 {
+		return
+	}
+	window, err := wcore.GetWindow(ctx, client.WindowIds[0])
+	if err != nil {
+		return
+	}
+	workspace, err := wcore.GetWorkspace(ctx, window.WorkspaceId)
+	if err != nil || len(workspace.TabIds) == 0 {
+		return
+	}
+	tabID := workspace.ActiveTabId
+	if tabID == "" {
+		tabID = workspace.TabIds[0]
+	}
+	log.Printf("WAVESRV-INIT client:%s window:%s tab:%s\n", client.OID, window.OID, tabID)
+}
+
 func clearTempFiles() error {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancelFn()
@@ -543,6 +565,7 @@ func main() {
 	if firstLaunch {
 		log.Printf("first launch detected")
 	}
+	logInitialState()
 	err = clearTempFiles()
 	if err != nil {
 		log.Printf("error clearing temp files: %v\n", err)

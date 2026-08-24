@@ -16,7 +16,8 @@ function initWshrpc(routeId: string): WSControl {
     const handleFn = (event: WSEventType) => {
         DefaultRouter.recvRpcMessage(event.data);
     };
-    initGlobalWS(getWSServerEndpoint(), routeId, handleFn);
+    const authKey = (globalThis as any).window?.api?.getAuthKey?.();
+    initGlobalWS(getWSServerEndpoint(), routeId, handleFn, authKey ? { authKey } : undefined);
     globalWS.connectNow("connectWshrpc");
     TabRpcClient = new TabClient(routeId);
     setWpsRpcClient(TabRpcClient);
